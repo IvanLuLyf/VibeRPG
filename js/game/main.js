@@ -174,7 +174,7 @@ function loadImages() {
 function applyLoadedMap(mapData, mapId, tileset, mapXml) {
     let map = null;
     if (mapId === 0) {
-        g_worldmap = new WorldMap(mapXml, tileset, mapData.music);
+        g_worldmap = new WorldMap(mapXml, tileset, mapData.music, mapData.overWorld === true);
         map = g_worldmap.getSubMap(0);
     } else {
         map = new SubMap(mapXml, tileset, mapData.overWorld, mapData.music);

@@ -6,12 +6,8 @@ const GameBusiness = {
      * mapId -> { i18nKey } — shown when entering map (strings in language packs, e.g. en-ui / zh-ui).
      */
     MAP_PLACES: {
-        0: { i18nKey: "place.world" },
-        8: { i18nKey: "place.milford" },
-        15: { i18nKey: "place.castle_town" },
-        23: { i18nKey: "place.kingdom" },
-        3: { i18nKey: "place.dark_forest" },
-        13: { i18nKey: "place.mountain_pass" }
+        0: { i18nKey: "place.hub" },
+        1: { i18nKey: "place.field" }
     },
 
     onMapEntered(mapId) {

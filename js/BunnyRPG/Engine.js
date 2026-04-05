@@ -49,6 +49,13 @@ function configurePixelArtCtx(ctx) {
     if (ctx.imageSmoothingQuality !== undefined) {
         ctx.imageSmoothingQuality = "low";
     }
+    /* Vendor aliases — avoids blurry upscaled sprites when the browser defaults smoothing on. */
+    if (ctx.webkitImageSmoothingEnabled !== undefined) {
+        ctx.webkitImageSmoothingEnabled = false;
+    }
+    if (ctx.mozImageSmoothingEnabled !== undefined) {
+        ctx.mozImageSmoothingEnabled = false;
+    }
 }
 
 configurePixelArtCtx(mapCtx);
@@ -699,13 +706,15 @@ class SubMap {
  * main world map; it's initialized by the mapXml and tileset that
  * you pass in.  You can also call addSubMap to add additional sub-maps.*/
 class WorldMap {
-    constructor(mapXml, tileset, music) {
+    /** @param {boolean} [overworld] If true, sprites draw squashed to tile (legacy “world map” look). Map 0 must match registerGameMap(..., overWorld). */
+    constructor(mapXml, tileset, music, overworld) {
         this._subMapList = [];
         this._currentSubMap = 0;
         this._scrollX = 0;
         this._scrollY = 0;
 
-        var mainMap = new SubMap(mapXml, tileset, true, music);
+        var isOverWorld = overworld === true;
+        var mainMap = new SubMap(mapXml, tileset, isOverWorld, music);
         this._subMapList[0] = mainMap;
 
         // Are we busy with animations?
@@ -3501,7 +3510,7 @@ class MonsterMenu extends HorizMenu {
         var monsterLefts = monsterList.map(function (monster) {
             return monster.getLoc();
         });
-        var lineTop = BATTLE_ENEMY_SPRITE_Y + SPRITE_HEIGHT + 4;
+        var lineTop = BATTLE_ENEMY_SPRITE_Y + BATTLE_PLAYER_SPRITE_SRC_H + 4;
         super({
             type: BATTLE_MONSTER_MENU,
             numberSelections: monsterList.length,
@@ -4687,18 +4696,24 @@ class Battle {
     drawPlayer() {
         var sh = spriteCanvas.height;
         var dx = BATTLE_PLAYER_SPRITE_X;
-        var dy = sh - BATTLE_BOTTOM_PANEL_H - SPRITE_HEIGHT + 12;
-        this._playerSpriteRect = { x: dx - 2, y: dy - 2, w: SPRITE_WIDTH + 4, h: SPRITE_HEIGHT + 4 };
+        var dy = sh - BATTLE_BOTTOM_PANEL_H - BATTLE_PLAYER_SPRITE_SRC_H + 12;
+        this._playerSpriteRect = {
+            x: dx - 2,
+            y: dy - 2,
+            w: SPRITE_WIDTH + 4,
+            h: BATTLE_PLAYER_SPRITE_SRC_H + 4
+        };
 
+        var battleSy = FACING_UP * SPRITE_HEIGHT + (SPRITE_HEIGHT - BATTLE_PLAYER_SPRITE_SRC_H);
         spriteCtx.drawImage(g_player._img,
             SPRITE_WIDTH,
-            FACING_UP * SPRITE_HEIGHT,
+            battleSy,
             SPRITE_WIDTH,
-            SPRITE_HEIGHT,
+            BATTLE_PLAYER_SPRITE_SRC_H,
             dx,
             dy,
             SPRITE_WIDTH,
-            SPRITE_HEIGHT);
+            BATTLE_PLAYER_SPRITE_SRC_H);
     }
 
     /* Erases player on battle screen */

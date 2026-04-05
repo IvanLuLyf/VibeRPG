@@ -7,17 +7,14 @@
 
     var enUiKeys = {
         "boot.powered_by": "Powered by BunnyRPG",
-        "boot.title": "Nakamon",
+        "boot.title": "OS-RPG",
         "boot.loading": "Loading resources…",
         "boot.load_fail_prefix": "Some resources failed to load:\n",
         "shop.thanks": "Thank you for your business.\nPlease come again.",
         "encounter.appear": "{name} appeared!",
-        "place.world": "World Map",
-        "place.milford": "Milford",
-        "place.castle_town": "Castle Town",
-        "place.kingdom": "Kingdom of Gran",
-        "place.dark_forest": "Dark Forest",
-        "place.mountain_pass": "Mountain Pass",
+        "place.hub": "Hub",
+        "place.field": "Field (random encounters)",
+        "player.default_name": "Frieren",
         "game.name_prompt": "What is your name?",
         "game.secret_prompt": "Enter password:",
         "game.potmoon_reward": "The stars align. You are fully equipped.",
@@ -180,22 +177,8 @@
         }
     };
 
-    var enSceneDialogue = {
-        "8": {
-            shop_sign: {
-                welcome: "The Milford sign creaks gently in the wind."
-            }
-        },
-        "15": {
-            gate_guard: {
-                halt: "Halt! State your business."
-            }
-        }
-    };
-
     BunnyRPG.registerLocale("en", {
         keys: enUiKeys,
-        keyTree: enKeyTree,
-        sceneDialogue: enSceneDialogue
+        keyTree: enKeyTree
     });
 })();

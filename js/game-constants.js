@@ -20,7 +20,10 @@ const MIN_SCREEN_SQUARE_Y = 4;
 const MAX_SCREEN_SQUARE_Y = 6;
 
 const SPRITE_WIDTH = 32;
-const SPRITE_HEIGHT = 48;
+/** Walk-sheet frame height (4 rows × this = texture height). Extra space above the foot tile for hair/staff (~2 map tiles). */
+const SPRITE_HEIGHT = 96;
+/** Battle UI draws only the bottom strip of each walk frame (classic ~48px body). */
+const BATTLE_PLAYER_SPRITE_SRC_H = 48;
 
 const FPS = 30;
 const SCROLL_FACTOR = 4;

@@ -1,7 +1,7 @@
 /**
  * 极简命令式脚本（每行一条）。用于 maps 里 NPC 的 `script` / 地图格 `onAction.script`。
  *
- * NPC 对话绑定：把脚本写在对应 NPC 的 `script` 字段即可（数据在 js/game/maps/maps-*.js 区域包内）。
+ * NPC 对话绑定：把脚本写在对应 NPC 的 `script` 字段即可（地图数据在 js/game/maps/maps-starter.js）。
  * 多语言：`t|i18nKey`（文案在 en-ui / 各语言包）；或 `scene|roleId|lineKey|英文回退`。
  * 元数据 / 备忘：任意以 # 开头的行是注释，可写 # npc:foo # line:1 等方便检索（不参与执行）。
  *

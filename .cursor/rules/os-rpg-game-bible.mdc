@@ -1,0 +1,38 @@
+---
+description: OS-RPG 项目目标、人设与素材规范（葬送的芙莉莲向同人创作）
+alwaysApply: true
+---
+
+# OS-RPG 游戏要求（持久备忘）
+
+## 项目形态
+- 基于 BunnyRPG 的 HTML5/Canvas JRPG；核心在 `js/BunnyRPG/Engine.js`，内容在 `js/game/*`。
+- 当前地图骨架：`js/game/maps/maps-starter.js`；子图 ID 仅 `SUBMAP_WORLD_MAP=0`（据点）、`SUBMAP_START_FIELD=1`（野外遇敌）；TMX 仅 `xml/House2.tmx.xml`、`xml/Mountain.tmx.xml`。
+- 多语言：`js/i18n.js` + `js/lang/*`；地点名用 `GameBusiness.MAP_PLACES`。
+
+## 剧情与世界观（用户方向）
+- 标题与叙事意向：**《葬送的芙莉莲》** 同人向；勇者一行击败魔王后的时代感可延续，但具体剧本由用户自行编写。
+- **主角队人设（文案与美术需一致）**
+  - **芙莉莲**：精灵族大魔法使；**银白双马尾长发**、**绿色眼瞳**、**尖耳**、**白皙肤色**；少女体态；魔法使气质、偏冷静。
+  - **辛美尔**：人类勇者；**蓝色短发**；勇者/英雄气质，可带剑。
+  - **海塔**：人类僧侣；**绿色短发**；僧侣袍；曾好酒、现可偏稳重唠叨。
+  - **艾泽**：矮人战士；**褐发与浓须遮面**；**维京式双角头盔**；沉默可靠、重甲/斧锤类武器气质。
+
+## 人设参考图（AI 生成，需自行对齐网格/切片）
+- `images/char-frieren-pixel.png` — 芙莉莲向
+- `images/char-himmel-pixel.png` — 辛美尔向
+- `images/char-heiter-pixel.png` — 海塔向
+- `images/char-eisen-pixel.png` — 艾泽向  
+  接入游戏：在 `images.js` 注册 `imgRef` + 在 `Sprite`/`Player` 使用对应 `sx,sy` 切片，或导入 Aseprite 重排为与 `Trevor.png` 相同步进。
+
+## 行走图硬性规格（文生图请照抄）
+- 完整约定与英文提示词模板见 **`scripts/SPRITE_SHEET_GENERATION_SPEC.md`**（尺寸、四向顺序、透明底、脚底对齐）。
+- 与 `js/game-constants.js` 中 **`SPRITE_WIDTH` / `SPRITE_HEIGHT`** 一致（当前为 **32×96** 每格，整图 **96×384**）。
+
+## 素材与版权
+- 引擎占位图曾为 `Trevor.png`、通用 NPC；**正式素材应按上表人设重画**，建议统一 **像素 JRPG** 规格（与 `SPRITE_WIDTH`/`SPRITE_HEIGHT` 对齐，便于 `Character` 行走图切片）。
+- 同人创作请注意原作版权；**公开分发**需自备授权或原创美术，勿直接使用原作截图/官方立绘。
+
+## 协作约定
+- 新增地图：在 `images.js` 声明 `SUBMAP_*` 与 `g_imageData` 图集；新 TMX 放 `xml/`；在 `maps-starter.js` 或新 `maps-*.js` 中 `registerGameMap` 并在 `index.html` 引入。
+- 对话：中文覆盖在 `js/lang/zh-dialogues.js`；复杂逻辑可用 `js/game/ScriptEngine.js` 与 NPC `script` 字段。
